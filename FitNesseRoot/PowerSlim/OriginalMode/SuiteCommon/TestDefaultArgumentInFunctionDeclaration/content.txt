@@ -3,4 +3,14 @@
 |check|eval|testdefault|not set|
 |check|eval|testdefault -value "set"|set|
 
+!define TheScript (!-<pre>
+function func-preformatted($x,$y){ "$x;$y" }
+</pre>-!)
+
+!|script|
+|check|eval| invoke-command -scriptblock { ${TheScript} } ||
+|check|eval|func-preformatted 1 2|1;2|
+|check|eval|$x||
+|check|eval|$y||
+
 

@@ -313,7 +313,7 @@ function Set-Script($s, $fmt){
   if($slimsymbols.Count){$slimsymbols.Keys | ? {!($s -cmatch "\`$$_\s*=")} | ? {$slimsymbols[$_] -is [string] } | % {$s=$s -creplace "\`$$_\b",$slimsymbols[$_] }}
   if($slimsymbols.Count){$slimsymbols.Keys | % { Set-Variable -Name $_ -Value $slimsymbols[$_] -Scope Global}}
   $s = $fmt -f $s
-  if($s.StartsWith('function',$true,$null)){Set-Variable -Name Script__ -Value ($s -replace 'function\s+(.+)(?=\()','function script:$1') -Scope Global}
+  if($s  -match '(?M)^\s*function'){Set-Variable -Name Script__ -Value ($s -replace 'function\s+(.+)(?=[\(\{])','function script:$1') -Scope Global}
   else{Set-Variable -Name Script__ -Value ($s -replace '\$(\w+)((?=\s*[\+|\*|\-|/|%]*=)|(?=\s*,\s*\$\w+.*=))','$script:$1') -Scope Global}
 }
 

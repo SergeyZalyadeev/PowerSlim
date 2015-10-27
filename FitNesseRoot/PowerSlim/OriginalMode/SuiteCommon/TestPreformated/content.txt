@@ -4,6 +4,6 @@
 !|script|
 |check|eval|!-<pre>'preformatted text'</pre>-!                          |preformatted text                        |
 |check|eval|!-  <pre>'preformatted text with leading whitespace'</pre>-!|preformatted text with leading whitespace|
-|check|eval|'<body><pre>preformatted text</pre></body>'|<body><pre>preformatted text</pre></body>|
+|check not|eval|'<body><pre>preformatted text</pre></body>'|<body><pre>preformatted text</pre></body>|
 |Execute block|!-<pre>{'preformatted' + ' script'}</pre>-!|result|preformatted script|
 
