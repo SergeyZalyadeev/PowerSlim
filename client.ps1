@@ -24,13 +24,16 @@ function script:process_table_remotely($ps_table, $ps_fitnesse){
 
       foreach($t in $targets){ 
 
-          $ps_computer, $ps_port = $t.split(':')
+          $ps_computer, $ps_port1 = $t.split(':')
 
           if($ps_computer.StartsWith('$')){
               $ps_computer = $slimsymbols[$ps_computer.Substring(1)]
+              $ps_computer, $ps_port2 = $ps_computer.split(':')
+              "Resolving symbols: [$ps_computer], [$ps_port2]" | Out-Default
           }
 
-          if($ps_port -eq $null){$ps_port = 35};
+          #if($ps_port -eq $null){$ps_port = 35};
+          $ps_port = $ps_port2, $ps_port1, 35 | select -First 1
 
           Write-Verbose "Connecting to $ps_computer, $ps_port"
           
