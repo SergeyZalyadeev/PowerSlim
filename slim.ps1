@@ -561,14 +561,14 @@ function process_message($ps_stream){
 
   if($Remote -eq $true){
 
-    Write-Verbose "Buffer1 $ps_buf1"
-    Write-Verbose "Buffer2 $ps_buf2"
+    #Write-Verbose "Buffer1 $ps_buf1"
+    #Write-Verbose "Buffer2 $ps_buf2"
 
-    Write-Verbose "Processing table remotelly"
+    #Write-Verbose "Processing table remotelly"
 
     process_table_remotely $script:ps_table $ps_stream;
 
-    Write-Verbose "Done remote call"
+    #Write-Verbose "Done remote call"
 
     return
   }
