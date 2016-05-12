@@ -24,8 +24,9 @@ function _serialize_slimsymbols($slimsymbols)
 
     foreach($obj in $slimsymbols.GetEnumerator())
     {
+        $val = if($obj.Value) { $obj.Value.ToString() } else { '' }
         $keyLen = $obj.Key.Length
-        $valLen = $obj.Value.ToString().Length
+        $valLen = $val.Length 
         
         $totalLen = 52 + 6 + $keyLen + 2 + 36 + 6 + $valLen + 4 + 1
         $r = $sb.Append($totalLen.ToString('d6')).Append(':'
@@ -34,7 +35,7 @@ function _serialize_slimsymbols($slimsymbols)
         ).Append(':').Append($obj.Key).Append(':' # $keyLen + 2 
         ).Append('000016:scriptTableActor:000004:eval:' #36
         ).Append( (($valLen + 2).ToString("d6"))  #6
-        ).Append(":'").Append($obj.Value).Append("':").Append(']:'); # $valLen + 4 + 1
+        ).Append(":'").Append($val).Append("':").Append(']:'); # $valLen + 4 + 1
     }
     
     $sb.Append(']').ToString()
